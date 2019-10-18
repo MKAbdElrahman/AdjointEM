@@ -1,0 +1,63 @@
+\documentclass[10pt]{beamer}
+
+%\usetheme{metropolis}
+\usepackage{appendixnumberbeamer}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{framed,color}
+\definecolor{shadecolor}{rgb}{1,.8,.3}
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{xspace}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usefonttheme[onlymath]{serif}
+\usetikzlibrary{%
+	decorations.pathreplacing,%
+	decorations.pathmorphing%
+}
+\title{Introduction to the Adjoint Method}
+
+\author{
+	Mohamed Kamal AbdElrahman \\
+ \href{my_email}{s-mohamed.abdelrahman@zewilcity.edu.eg}}
+\institute{University of Science and Technology \\[10pt] Zewail City}
+\date{}
+\begin{document}
+\begin{frame}
+	\titlepage
+\end{frame}
+\begin{frame}{Outline}
+	\setbeamertemplate{section in toc}[sections numbered]
+	\tableofcontents%[hideallsubsections]
+\end{frame}
+\section{Adjoint Sensitivity Analysis of Linear Systems}
+\numberwithin{equation}{section}
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+		\item  Consider the Ordinary Differential Equation (ODE)
+		\begin{equation}
+a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi = s(t,z) 
+		\end{equation}
+\item $z$ is a design parameter that we want to change in order to minimize the objective function $G$
+\begin{equation}
+G = \int^{T}_0  g(\psi,z) \, dt
+\end{equation}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+	\item  To minimize G, we  need the gradient with respect to the design parameter $z$.
+	
+	\item The  design parameter $z$ can then be updated with the steepest descent 
+	\begin{equation}
+	z = z - \alpha \frac{dG}{dz}
+	\end{equation}
+	
+	\item Local descent involves iteratively determining a descent direction ($ \frac{dG}{dz}$) and	then taking a step $\alpha$ in that direction and repeating that process until convergence or some termination condition is met
+	\end{itemize}
+\end{frame}
+\end{document}
