@@ -60,4 +60,15 @@ G = \int^{T}_0  g(\psi,z) \, dt
 	\item Local descent involves iteratively determining a descent direction ($ \frac{dG}{dz}$) and	then taking a step $\alpha$ in that direction and repeating that process until convergence or some termination condition is met
 	\end{itemize}
 \end{frame}
+
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+		\item  Lets modify the objective function G
+		\begin{equation}
+G =  \int^{T}_0  g(\psi,z) \, dt + \int^{T}_0 \lambda(t) R \, dt 
+		\end{equation}
+		\item Where the residual $R = 0 =  a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi- s(t,z) $
+		\item The  equation is still valid and for any $\lambda$, since we are multiplying $\lambda$ by zero and just added a zero to the whole equation. 
+	\end{itemize}
+\end{frame}
 \end{document}
