@@ -9,6 +9,8 @@
 \definecolor{shadecolor}{rgb}{1,.8,.3}
 \usepackage{pgfplots}
 \usepgfplotslibrary{dateplot}
+\usepackage{breqn}
+
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 \usepackage{graphicx}
@@ -39,7 +41,7 @@
 	\begin{itemize}
 		\item  Consider the Ordinary Differential Equation (ODE)
 		\begin{equation}
-a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi = s(t,z) 
+a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi = s(t) 
 		\end{equation}
 \item $z$ is a design parameter that we want to change in order to minimize the objective function $G$
 \begin{equation}
@@ -67,8 +69,19 @@ G = \int^{T}_0  g(\psi,z) \, dt
 		\begin{equation}
 G =  \int^{T}_0  g(\psi,z) \, dt + \int^{T}_0 \lambda(t) R \, dt 
 		\end{equation}
-		\item Where the residual $R = 0 =  a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi- s(t,z) $
-		\item The  equation is still valid and for any $\lambda$, since we are multiplying $\lambda$ by zero and just added a zero to the whole equation. 
+		\item Where the residual $R = 0 =  a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi- s(t) $
+		\item The  equation is still valid and for any $\lambda(t)$, since we are multiplying $\lambda(t)$ by zero and we just added a zero to the whole equation. 
+		\item $\lambda(t)$ is called the adjoint variable.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+		\item Using the chain rule to obtain the objective function gradient:
+		\begin{dmath}
+\frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
++ \frac{\partial g}{\partial \psi} \frac{\partial \psi}{\partial z} + \lambda \left[  \frac{\partial a}{\partial z} \ddot{\psi} + \\ a \frac{\partial \ddot{\psi}}{\partial z} + \frac{\partial b}{\partial z} \dot{\psi} + b \frac{\partial \dot{\psi}}{\partial z} + \frac{\partial c}{\partial z} \psi + c \frac{\partial \psi}{\partial z}\right] 
+		\end{dmath} 
 	\end{itemize}
 \end{frame}
 \end{document}
