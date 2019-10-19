@@ -41,7 +41,7 @@
 	\begin{itemize}
 		\item  Consider the Ordinary Differential Equation (ODE)
 		\begin{equation}
-a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi = s(t) 
+ a(t,z)\frac{d \psi}{dt} +b(t,z) \psi = s(t) 
 		\end{equation}
 \item $z$ is a design parameter that we want to change in order to minimize the objective function $G$
 \begin{equation}
@@ -69,7 +69,7 @@ G = \int^{T}_0  g(\psi,z) \, dt
 		\begin{equation}
 G =  \int^{T}_0  g(\psi,z) \, dt + \int^{T}_0 \lambda(t) R \, dt 
 		\end{equation}
-		\item Where the residual $R = 0 =  a(t,z)\frac{d^2 \psi}{dt^2} + b(t,z)\frac{d \psi}{dt} +c(t,z) \psi- s(t) $
+		\item Where the residual $R = 0 =  a(t,z)\frac{d \psi}{dt} +b(t,z) \psi- s(t) $
 		\item The  equation is still valid and for any $\lambda(t)$, since we are multiplying $\lambda(t)$ by zero and we just added a zero to the whole equation. 
 		\item $\lambda(t)$ is called the adjoint variable.
 	\end{itemize}
@@ -80,8 +80,72 @@ G =  \int^{T}_0  g(\psi,z) \, dt + \int^{T}_0 \lambda(t) R \, dt
 		\item Using the chain rule to obtain the objective function gradient:
 		\begin{dmath}
 \frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
-+ \frac{\partial g}{\partial \psi} \frac{\partial \psi}{\partial z} + \lambda \left[  \frac{\partial a}{\partial z} \ddot{\psi} + \\ a \frac{\partial \ddot{\psi}}{\partial z} + \frac{\partial b}{\partial z} \dot{\psi} + b \frac{\partial \dot{\psi}}{\partial z} + \frac{\partial c}{\partial z} \psi + c \frac{\partial \psi}{\partial z}\right] 
++ \frac{\partial g}{\partial \psi} \frac{\partial \psi}{\partial z} \, dt + \int^T_0  \lambda \left[   \frac{\partial a}{\partial z} \dot{\psi} + a \frac{\partial \dot{\psi}}{\partial z} + \frac{\partial b}{\partial z} \psi + b \frac{\partial \psi}{\partial z}\right] \, dt
 		\end{dmath} 
+\item Integrating by parts the term containing $\frac{\partial \dot{\psi}}{\partial z} $
+\begin{equation}
+ \int^T_0 \lambda \, a  \frac{\partial \dot{\psi}}{\partial z} \, dt  = \lambda a \frac{\partial \psi}{\partial z} |^T_0 -  \int^T_0  \frac{\partial \psi}{\partial z} \frac{d(\lambda a)}{dt} dt    
+\end{equation}
+	\end{itemize}
+\end{frame}
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+	\item Collecting all the terms containing the integral of  $\frac{\partial \psi}{\partial z} $
+		\begin{dmath}
+		\frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
+		+ \lambda \frac{\partial b}{\partial z} \psi + \lambda \frac{\partial a}{\partial z} \dot{\psi}  \, dt + \int^T_0  -\frac{\partial \psi}{\partial z}  \frac{d(\lambda a)}{dt} +  \lambda b \frac{\partial \psi}{\partial z} +  \frac{\partial g}{\partial \psi} \frac{\partial \psi}{\partial z} \, dt
+		\end{dmath}
+		
+		\begin{dmath}
+			\frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
+			+ \lambda \frac{\partial b}{\partial z} \psi + \lambda \frac{\partial a}{\partial z} \dot{\psi}  \, dt + \int^T_0  \frac{\partial \psi}{\partial z} \left[-   \frac{d(\lambda a)}{dt} +  \lambda b +  \frac{\partial g}{\partial \psi} \right]  \, dt + \lambda a \frac{\partial \psi}{\partial z} |^T_0 
+		\end{dmath} 		 
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+		\item If the adjoint variable $\lambda$  satisfied the following equation 
+		\begin{equation}
+-   \frac{d(\lambda a)}{dt} +  \lambda b +  \frac{\partial g}{\partial \psi} = 0
+		\end{equation}  
+		\item Then the sensitivity of the objective function is 
+	\begin{dmath}
+		\frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
+		+ \lambda \frac{\partial b}{\partial z} \psi + \lambda \frac{\partial a}{\partial z} \dot{\psi}  \, dt + \lambda a \frac{\partial \psi}{\partial z} |^T_0 
+	\end{dmath} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+		\item $\frac{d \psi}{dz} = 0$ at t = 0, as the initial condition does not depend on the design parameter. 
+		\item Imposing the terminal condition $\lambda(T) = 0$
+		\begin{dmath}
+			\frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
+			+ \lambda \frac{\partial b}{\partial z} \psi + \lambda \frac{\partial a}{\partial z} \dot{\psi}  \, dt
+		\end{dmath} 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Adjoint Sensitivity Analysis of Linear Systems}
+	\begin{itemize}
+		\item To solve for the sensitivity, we carry two simulations  \begin{enumerate}
+			\item Solve for $\psi$   
+				\begin{equation*}
+				a(t,z)\frac{d \psi}{dt} +b(t,z) \psi = s(t) 
+				\end{equation*}
+			\item Calculate the source term for the adjoint equation and solve for $\lambda$	
+					\begin{equation*}
+					   \frac{d(\lambda a)}{dt}   -\lambda b   =  \frac{\partial g}{\partial \psi}
+					\end{equation*} 
+			\item Evaluate the sensitivity 
+				\begin{equation*}
+					\frac{dG}{dz} = \int^T_0 \frac{\partial g}{\partial z}
+					+ \lambda \frac{\partial b}{\partial z} \psi + \lambda \frac{\partial a}{\partial z} \dot{\psi}  \, dt
+				\end{equation*}		 
+		\end{enumerate}
 	\end{itemize}
 \end{frame}
 \end{document}
