@@ -1,0 +1,49 @@
+=>PYTHONTEX#jl#default#default#0#code#####9#
+	cur_plot = nothing
+	function plot_plots_pgfplots(args...; kwags...)
+		global cur_plot
+		cur_plot = Plots.plot(args...; kwags...)
+	end
+	function plot_pgfplots(args...; kwags...)
+		global cur_plot
+		cur_plot = PGFPlots.plot(args...; kwags...)
+	end
+	function plot_gadfly(args...; kwags...)
+		global cur_plot
+		cur_plot = Gadfly.plot(args...; kwags...)
+	end
+=>PYTHONTEX#jl#default#default#1#c#####31#
+using Plots;pgfplots()
+=>PYTHONTEX#jl#default#default#2#c#####32#
+plot(args...; kwags...) = plot_plots_pgfplots(args...; kwags...)
+=>PYTHONTEX#jl#default#default#3#c#####56#
+using PGFPlots
+=>PYTHONTEX#jl#default#default#4#c#####56#
+plot(args...; kwags...) = plot_pgfplots(args...; kwags...)
+=>PYTHONTEX:SETTINGS#
+version=0.14
+outputdir=pythontex-files-fd_auto_diff
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python|
+pygfamily=pylabcon|pycon|
+pygfamily=jl|julia|
+pygfamily=julia|julia|
