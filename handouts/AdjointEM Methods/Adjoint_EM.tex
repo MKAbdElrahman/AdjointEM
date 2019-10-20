@@ -4,7 +4,6 @@
 6 October, Giza, Egypt}
 
 \usepackage{amsmath}  % extended mathematics
-
 \usepackage{graphicx} % allow embedded images
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}} % set of paths to search for images
@@ -51,4 +50,54 @@ Where $\alpha$ is the step size in the gradient direction\sidenote[2]{Some algor
 optimize the step size so that the step maximally increases $G$}. 	
  \\
  Assuming we have $n$ number of design points, to calculate the sensitivity $\frac{dG}{d\epsilon}$ there are different approaches which vary in complexity and accuracy. One way is by using a finite difference approximation $\frac{dG}{d\epsilon} \approx \frac{\Delta G}{ \Delta\epsilon}$. In this approach we need to carry $n$ number of forward simulations. For a typical $100 \times 100 \times 100$ $3$D  finite difference grid, this means $1000000$ simulations!. This approach also suffers from numerical discretization errors and the need to determine how small or large is $\Delta \epsilon$.  Automatic differentiation can be used to get the derivative exactly. However, there are are two modes in automatic differentiation. The automatic forward mode, like finite difference, needs $n$ number of forward simulations. In the automatic adjoint or reverse mode, two simulations are only needed regardless of the number of the design points. So, the adjoint method is by far much better in accuracy than finite difference and computational cost than automatic forward differentiation.
+ \section{Problem Formulation}
+ Before driving the adjoint equation, lets rewrite Maxwell's in a matrix form:
+ \begin{equation}
+ \begin{bmatrix} 
+ \mu_0 & 0 \\
+ 0 & -\epsilon
+ \end{bmatrix}  \begin{bmatrix} 
+ \frac{\partial \mathbf{H}}{\partial t}  \\
+  \frac{\partial \mathbf{E}}{\partial t}
+ \end{bmatrix} +\begin{bmatrix} 
+ 0 & \nabla \times \\
+ \nabla \times & 0 
+ \end{bmatrix}  \begin{bmatrix} 
+ \mathbf{H}  \\
+ \mathbf{E} 
+ \end{bmatrix} = \begin{bmatrix} 
+ 0 \\
+ \mathbf{J} 
+ \end{bmatrix}
+ \end{equation}
+ Which could be written as
+ \begin{equation}\label{forward_equation_sym}
+[C] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} = \mathbf{S}
+ \end{equation} 
+ if the following definitions have been made $\mathbf{X} = \begin{bmatrix} 
+ \mathbf{H}  \\
+ \mathbf{E} 
+ \end{bmatrix} $, $[C] = \begin{bmatrix} 
+ \mu_0 & 0 \\
+ 0 & -\epsilon
+ \end{bmatrix}$, $[D] = \begin{bmatrix} 
+ 0 & \nabla \times \\
+ \nabla \times & 0 
+ \end{bmatrix}  $ and $\mathbf{S} = \begin{bmatrix} 
+ 0 \\
+ \mathbf{J} 
+ \end{bmatrix} $
+ 
+ The initial condition for equation(\ref*{forward_equation_sym}) is \begin{equation}
+I(\mathbf{X}(0),\epsilon) = \mathbf{0}
+ \end{equation}
+ Our optimization problem can  be then formulated as
+  
+  \begin{equation}
+  \begin{aligned}
+  \min_{\epsilon} \quad & G(\epsilon) = \int^T_0 g(\mathbf{X},\epsilon,t) dt \\
+  \textrm{s.t.} \quad & [C] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} - \mathbf{S} = 0\\
+  &I(\mathbf{X}(0),\epsilon) = \mathbf{0}   \\
+  \end{aligned}
+  \end{equation}
 \end{document}
