@@ -1,0 +1,54 @@
+\documentclass{tufte-handout}
+\title{ Adjoint Computational Electrodynamics}
+\author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
+6 October, Giza, Egypt}
+
+\usepackage{amsmath}  % extended mathematics
+
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		\noindent
+		 The adjoint method is used to  inverse design linear and nonlinear photonic devices. The purpose of this handout is give the reader an introduction to the topic.   
+	\end{abstract}
+
+	\section{Motivation}
+	In normal electromagnetic simulation, we are given a material distribution represented by $\left( \epsilon(x,y,z), \mu(x,y,z)\right)  $ and a current density source $\mathbf{J(x,y,z)}$. Maxwell's equations are then solved using one of the computational techniques (FD, FEM, MoM) for the excited electromagnetic field $(\mathbf{H},\mathbf{E})$. For linear, isotropic, non magnetic and stationary media \sidenote[1]{In general $\epsilon$ and $\mu$ may be nonlinear anisotropic tensors. We restricted ourselves to linear isotropic media for simplicity and most material are nearly the case.} $\mathbf{B} = \mu_0 \mathbf{H}$ and $\mathbf{D} = \epsilon \mathbf{E}$. Maxwell's equations take the form 
+	  \begin{subequations}
+	  	\begin{align}
+	  		\nabla \times \mathbf{E}  &= - \mu_0 \frac{\partial \mathbf{H}}{\partial t} \\
+	    	\nabla \times \mathbf{H}  &= \mathbf{J} +  \epsilon \frac{\partial \mathbf{E}}{\partial t}
+	  	\end{align}
+	  \end{subequations}
+ We are asked to maximize the scaler quantity $G(\mathbf{E},\mathbf{H})$ by varying the dielectric structure $\epsilon(x,y,z)$. $G$ is often a measure of device performance: for example, the power flowing in certain direction or mode conversion efficiency. This is an inverse design problem, we start by defining an objective $G$ and ask for the best material distribution  to achieve this objective. 
+ 
+ The gradient quantity $\frac{dG}{d\epsilon}$ is  useful to compute. It could be used as a measure of robustness and sensitivity to any structure deformations like fabrication imperfections. In inverse design, it is the major quantity needed as it points in the direction of steepest ascent, from which we have an informed decision of how to update the dielectric structure.
+ \begin{equation}
+\epsilon \longleftarrow \epsilon + \alpha \frac{dG}{d\epsilon}
+ \end{equation}
+Where $\alpha$ is the step size in the gradient direction\sidenote[2]{Some algorithms attempt to
+optimize the step size so that the step maximally increases $G$}. 	
+ \\
+ Assuming we have $n$ number of design points, to calculate the sensitivity $\frac{dG}{d\epsilon}$ there are different approaches which vary in complexity and accuracy. One way is by using a finite difference approximation $\frac{dG}{d\epsilon} \approx \frac{\Delta G}{ \Delta\epsilon}$. In this approach we need to carry $n$ number of forward simulations. For a typical $100 \times 100 \times 100$ $3$D  finite difference grid, this means $1000000$ simulations!. This approach also suffers from numerical discretization errors and the need to determine how small or large is $\Delta \epsilon$.  Automatic differentiation can be used to get the derivative exactly. However, there are are two modes in automatic differentiation. The automatic forward mode, like finite difference, needs $n$ number of forward simulations. In the automatic adjoint or reverse mode, two simulations are only needed regardless of the number of the design points.   
+\end{document}
