@@ -1,7 +1,7 @@
 \documentclass{tufte-handout}
 \title{ Adjoint Computational Electromagnetics}
 \author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
-6 October, Giza, Egypt}
+6 October, Giza,\\ Egypt}
 
 \usepackage{amsmath}  % extended mathematics
 \usepackage{graphicx} % allow embedded images
@@ -102,7 +102,8 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
   \end{equation}
  Where we have assumed our objective function can be written in this integral form $\int^T_0 g(\mathbf{X},\epsilon,t) dt$. 
  
- Equation (\ref{forward_equation_sym}) is  commonly solved by discretization  in space first and then solving the resulting system of Ordinary Differential Equations (ODEs). We can either start by replacing time derivatives with finite differences to arrive at a recursive set of spatial problems to be discretized. The discretization in space could be in done in real or spectral domains. Among the numerical methods, the finite difference method, the finite element
- method, and the method of moments form the core of computational electromagnetics. One of our goals is to show a simple one dimensional example with code for each method  along with its adjoint formulation. Interested readers can directly add an adjoint solver on top their solvers very easily and start doing inverse design. 
+ Equation (\ref{forward_equation_sym}) is  commonly solved by discretization  in space first and then solving the resulting system of Ordinary Differential Equations (ODEs). We can either start by replacing time derivatives with finite differences to arrive at a recursive set of spatial problems to be discretized. The discretization in space could be in done in real or spectral domains. Maxwell's equation could even be expanded in the natural complete eigen-basis of the problem in a coupled-mode-like fashion and inverse design could be done with very low dimensional matrices.   Among the numerical methods, the finite difference method, the finite element
+ method, and the method of moments form the core of computational electromagnetics. One of our goals is to show a simple one dimensional example with code for each method  along with its adjoint formulation. Interested readers can directly add an adjoint solver on top their EM solvers very easily and start doing inverse design. 
  \section{Adjoint Method}
+ In gradient based inverse design, we start with an initial dielectric profile $\epsilon^{0}(x,y,z)$  and then use local  gradient of the objective function to guide the search in device space \sidenote[3]{Additional constraints should be added to guarantee robustness and easy fabrication of the final discovered devices. Fabrication constraints play a key role in inverse design and we will talk about it more in a future separate handout.}. 
 \end{document}
