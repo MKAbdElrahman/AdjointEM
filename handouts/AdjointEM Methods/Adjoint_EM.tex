@@ -1,5 +1,5 @@
 \documentclass{tufte-handout}
-\title{ Adjoint Computational Electrodynamics}
+\title{ Adjoint Computational Electromagnetics}
 \author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
 6 October, Giza, Egypt}
 
@@ -51,7 +51,7 @@ optimize the step size so that the step maximally increases $G$}.
  \\
  Assuming we have $n$ number of design points, to calculate the sensitivity $\frac{dG}{d\epsilon}$ there are different approaches which vary in complexity and accuracy. One way is by using a finite difference approximation $\frac{dG}{d\epsilon} \approx \frac{\Delta G}{ \Delta\epsilon}$. In this approach we need to carry $n$ number of forward simulations. For a typical $100 \times 100 \times 100$ $3$D  finite difference grid, this means $1000000$ simulations!. This approach also suffers from numerical discretization errors and the need to determine how small or large is $\Delta \epsilon$.  Automatic differentiation can be used to get the derivative exactly. However, there are are two modes in automatic differentiation. The automatic forward mode, like finite difference, needs $n$ number of forward simulations. In the automatic adjoint or reverse mode, two simulations are only needed regardless of the number of the design points. So, the adjoint method is by far much better in accuracy than finite difference and computational cost than automatic forward differentiation.
  \section{Problem Formulation}
- Before driving the adjoint equation, lets rewrite Maxwell's in a matrix form:
+ Before driving the adjoint equation, lets put Maxwell's in a matrix form:
  \begin{equation}
  \begin{bmatrix} 
  \mu_0 & 0 \\
@@ -88,7 +88,7 @@ optimize the step size so that the step maximally increases $G$}.
  \mathbf{J} 
  \end{bmatrix} $
  
- The initial condition for equation(\ref*{forward_equation_sym}) is \begin{equation}
+ The initial condition for equation(\ref{forward_equation_sym}) is \begin{equation}
 I(\mathbf{X}(0),\epsilon) = \mathbf{0}
  \end{equation}
  Our optimization problem can  be then formulated as
@@ -100,4 +100,7 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
   &I(\mathbf{X}(0),\epsilon) = \mathbf{0}   \\
   \end{aligned}
   \end{equation}
+ Where we have assumed our objective function can be written in this integral form $\int^T_0 g(\mathbf{X},\epsilon,t) dt$. 
+ 
+ Equation (\ref{forward_equation_sym}) is  commonly solved by discretization  in space first and then solving the resulting system of ODEs. We can either start by replacing time derivatives with finite differences  to arrive at a recursive set of spatial problems to be discretized.
 \end{document}
