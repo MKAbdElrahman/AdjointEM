@@ -115,5 +115,31 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
  \begin{equation}
 G =  \int^T_0 g(\mathbf{X},\epsilon,t)   + \lambda^T \left( [C(\epsilon)] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} - \mathbf{S}) \right) + \kappa^T\left( I(\mathbf{X}(0),\epsilon) \right) dt
  \end{equation}
- The vector  $\lambda$  is time dependent. $\kappa$  is another vector associated with the initial conditions.   The objective function has not changed after this modification, the equation is also the same  for any choice of $\lambda$ and $\kappa$. We will choose them in a way that eliminate the need for  the term   $ \frac{\partial \mathbf{X}}{\partial \epsilon}$ in the objective function gradient $\frac{dG}{d\epsilon}$. The vectors $\lambda$ and $\kappa$ are commonly called Lagrange multipliers and the modified objective function is the system Lagrangian that we seek to minimize. 
+ The vector  $\lambda$  is time dependent. $\kappa$  is another vector associated with the initial conditions.   The objective function has not changed after this modification, the equation is also the same  for any choice of $\lambda$ and $\kappa$. We will choose them in a way that eliminate the need for  the term   $ \frac{\partial \mathbf{X}}{\partial \epsilon}$ in the objective function gradient $\frac{dG}{d\epsilon}$. The vectors $\lambda$ and $\kappa$ are commonly called Lagrange multipliers and the modified objective function is the system Lagrangian that we seek to maximize. 
+ 
+ Taking the total derivative of the Lagrangian,
+ \begin{multline}\label{lag_grad}
+\frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} +  \frac{\partial g}{\partial \mathbf{X}} \frac{\partial \mathbf{X}}{\partial \epsilon}\right] + \\ \lambda^T\left[ \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt} + C \frac{\partial}{\partial \epsilon} \frac{d \mathbf{X}}{dt} + D \frac{\partial \mathbf{X}}{\partial \epsilon} \right]  dt +  \kappa^T  \left[ \frac{\partial I}{\partial \mathbf{X}(0)}  \frac{\partial \mathbf{X}(0)}{\partial \epsilon} + \frac{\partial I}{\partial \epsilon} \right] 
+ \end{multline}
+
+The problematic term  $\frac{\partial \mathbf{X}}{\partial \epsilon}$  is what we want to git rid off, however we have now its time derivative added. Integration by parts can help us reduce the time derivative to zero order.  
+\begin{equation}\label{part_intg}
+ \int_{0}^{T}  \lambda^T C \frac{\partial}{\partial \epsilon}   \frac{d \mathbf{X}}{dt} dt = \lambda^T C \frac{\partial \mathbf{X}}{\partial \epsilon}|^T_0 - \int_{0}^{T}
+   \frac{ d\left(  \lambda^T C \right) }{dt} \frac{\partial \mathbf{X}}{\partial \epsilon} dt
+\end{equation}
+Substituting (\ref*{part_intg}) into (\ref*{lag_grad}) and collecting terms  in $\frac{\partial \mathbf{X}}{\partial \epsilon}$ and  $\frac{\partial \mathbf{X}(0)}{\partial \epsilon}$ yield
+
+ \begin{multline}\label{lag_gradd}
+ \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} + \lambda^T \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt}  \right] +\left[  \frac{\partial g}{\partial \mathbf{X}}  + \lambda^T  D - \frac{ d\left(  \lambda^T C \right) }{dt}  \right]  \frac{\partial \mathbf{X}}{\partial \epsilon}  +  \\      \left[ \kappa^T \frac{\partial I}{\partial \mathbf{X}(0)}  -\lambda^T C   \right] \frac{\partial \mathbf{X}(0)}{\partial \epsilon} + \lambda^T C \frac{\partial \mathbf{X}(T)}{\partial \epsilon} + \kappa^T \frac{\partial I}{\partial \epsilon}
+ \end{multline}
+ We can get rid of $\frac{\partial \mathbf{X}}{\partial\epsilon}$  by choosing $\lambda^T$ to satisfy the following differential equation
+\begin{equation}
+ \frac{\partial g}{\partial \mathbf{X}}  + \lambda^T  D - \frac{ d\left(  \lambda^T C \right) }{dt} = 0
+\end{equation}
+We can get rid of  $\frac{\partial \mathbf{X}(0)}{d\epsilon}$  by choosing $\kappa^T = \lambda^T C \left[  \frac{\partial I}{\partial \mathbf{X}(0)}\right] ^{-1} $
+
+If we also imposed the terminal condition $\lambda^T(T) C = 0$, the objective function gradient is 
+ \begin{equation}\label{lag_graddd}
+ \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} + \lambda^T \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt}  \right]  + \ \kappa^T \frac{\partial I}{\partial \epsilon}
+ \end{equation}
 \end{document}
