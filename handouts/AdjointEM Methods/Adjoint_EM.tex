@@ -93,7 +93,7 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
  \end{equation}
  Our optimization problem can  be then formulated as
   
-  \begin{equation}
+  \begin{equation}\label{opt_problem}
   \begin{aligned}
   \max_{\epsilon} \quad & G(\epsilon) = \int^T_0 g(\mathbf{X},\epsilon,t) dt \\
   \textrm{s.t.} \quad & [C] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} - \mathbf{S} = 0\\
@@ -105,5 +105,9 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
  Equation (\ref{forward_equation_sym}) is  commonly solved by discretization  in space first and then solving the resulting system of Ordinary Differential Equations (ODEs). We can either start by replacing time derivatives with finite differences to arrive at a recursive set of spatial problems to be discretized. The discretization in space could be in done in real or spectral domains. Maxwell's equation could even be expanded in the natural complete eigen-basis of the problem in a coupled-mode-like fashion and inverse design could be done with very low dimensional matrices.   Among the numerical methods, the finite difference method, the finite element
  method, and the method of moments form the core of computational electromagnetics. One of our goals is to show a simple one dimensional example with code for each method  along with its adjoint formulation. Interested readers can directly add an adjoint solver on top their EM solvers very easily and start doing inverse design. 
  \section{Adjoint Method}
- In gradient based inverse design, we start with an initial dielectric profile $\epsilon^{0}(x,y,z)$  and then use local  gradient of the objective function to guide the search in device space \sidenote[3]{Additional constraints should be added to guarantee robustness and easy fabrication of the final discovered devices. Fabrication constraints play a key role in inverse design and we will talk about it more in a future separate handout.}. 
+ In gradient based inverse design, we start with an initial dielectric profile $\epsilon^{0}(x,y,z)$  and then use local  gradient of the objective function to guide the search in device space \sidenote[3]{Additional constraints should be added to guarantee robustness and easy fabrication of the final discovered devices. Fabrication constraints play a key role in inverse design and we will talk about it more in a future separate handout.}. The gradient of the objective function $G$ in equation (\ref{opt_problem})
+ \begin{equation}
+ \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} +  \frac{\partial g}{\partial \mathbf{X}} \frac{\partial \mathbf{X}}{\partial \epsilon}\right] dt
+ \end{equation}
+ To evaluate this integral, we need to calculate the term $ \frac{\partial \mathbf{X}}{\partial \epsilon}$. If the vector $\epsilon$ is $n$ dimensional, we need to repeat the simulation $n$ number of times. For each, we change the component $\epsilon_i$ by $\Delta \epsilon_i$, then the change in the objective function is determined. Finally, the slope is calculated by dividing the change in the objective function by $\Delta \epsilon_i$ . The whole point of adjoint method is to avoid calculating the derivative term $ \frac{\partial \mathbf{X}}{\partial \epsilon}$. Soon, we will discover that the adjoint method can magically determine the gradient at all design points with an additional cost of one extra simulation.  
 \end{document}
