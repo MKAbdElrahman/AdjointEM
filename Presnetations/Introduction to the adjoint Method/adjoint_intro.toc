@@ -1,2 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\beamer@sectionintoc {1}{Adjoint Sensitivity Analysis of Linear Systems}{3}{0}{1}
