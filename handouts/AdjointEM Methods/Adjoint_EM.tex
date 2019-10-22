@@ -72,15 +72,15 @@ optimize the step size so that the step maximally increases $G$}.
  \end{equation}
  Which could be written as
  \begin{equation}\label{forward_equation_sym}
-[C] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} = \mathbf{S}
+C \frac{d \mathbf{X}}{dt} + D \mathbf{X} = \mathbf{S}
  \end{equation} 
  if the following definitions have been made $\mathbf{X} = \begin{bmatrix} 
  \mathbf{H}  \\
  \mathbf{E} 
- \end{bmatrix} $, $[C] = \begin{bmatrix} 
+ \end{bmatrix} $, $C = \begin{bmatrix} 
  \mu_0 & 0 \\
  0 & -\epsilon
- \end{bmatrix}$, $[D] = \begin{bmatrix} 
+ \end{bmatrix}$, $D = \begin{bmatrix} 
  0 & \nabla \times \\
  \nabla \times & 0 
  \end{bmatrix}  $ and $\mathbf{S} = \begin{bmatrix} 
@@ -96,7 +96,7 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
   \begin{equation}\label{opt_problem}
   \begin{aligned}
   \max_{\epsilon} \quad & G(\epsilon) = \int^T_0 g(\mathbf{X},\epsilon,t) dt \\
-  \textrm{s.t.} \quad & [C] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} - \mathbf{S} = 0\\
+  \textrm{s.t.} \quad & C \frac{d \mathbf{X}}{dt} + D \mathbf{X} - \mathbf{S} = 0\\
   &I(\mathbf{X}(0),\epsilon) = \mathbf{0}   \\
   \end{aligned}
   \end{equation}
@@ -113,9 +113,9 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
  
  To eliminate the term $ \frac{\partial \mathbf{X}}{\partial \epsilon}$, the first step is to  add  multiples of $0$ to the objective function.
  \begin{equation}
-G =  \int^T_0 g(\mathbf{X},\epsilon,t)   + \lambda^T \left( [C(\epsilon)] \frac{d \mathbf{X}}{dt} + [D] \mathbf{X} - \mathbf{S}) \right) + \kappa^T\left( I(\mathbf{X}(0),\epsilon) \right) dt
+G =  \int^T_0 g(\mathbf{X},\epsilon,t)   + \lambda^T \left( C \frac{d \mathbf{X}}{dt} + D \mathbf{X} - \mathbf{S}) \right) + \kappa^T\left( I(\mathbf{X}(0),\epsilon) \right) dt
  \end{equation}
- The vector  $\lambda$  is time dependent. $\kappa$  is another vector associated with the initial conditions.   The objective function has not changed after this modification, the equation is also the same  for any choice of $\lambda$ and $\kappa$. We will choose them in a way that eliminate the need for  the term   $ \frac{\partial \mathbf{X}}{\partial \epsilon}$ in the objective function gradient $\frac{dG}{d\epsilon}$. The vectors $\lambda$ and $\kappa$ are commonly called Lagrange multipliers and the modified objective function is the system Lagrangian that we seek to maximize. 
+ The vector  $\mathbf{\lambda}$  is time dependent. $\kappa$  is another vector associated with the initial conditions.   The objective function has not changed after this modification, the equation is also the same  for any choice of $\lambda$ and $\kappa$. We will choose them in a way that eliminate the need for  the term   $ \frac{\partial \mathbf{X}}{\partial \epsilon}$ in the objective function gradient $\frac{dG}{d\epsilon}$. The vectors $\lambda$ and $\kappa$ are commonly called Lagrange multipliers and the modified objective function is the system Lagrangian that we seek to maximize. 
  
  Taking the total derivative of the Lagrangian,
  \begin{multline}\label{lag_grad}
@@ -138,8 +138,31 @@ Substituting (\ref*{part_intg}) into (\ref*{lag_grad}) and collecting terms  in 
 \end{equation}
 We can get rid of  $\frac{\partial \mathbf{X}(0)}{d\epsilon}$  by choosing $\kappa^T = \lambda^T C \left[  \frac{\partial I}{\partial \mathbf{X}(0)}\right] ^{-1} $
 
-If we also imposed the terminal condition $\lambda^T(T) C = 0$, the objective function gradient is 
+If we also imposed the terminal condition $\lambda^T(T) C = 0$ and noting that in most cases, the initial conditions don't depend on the the material distribution $\frac{\partial I}{\partial \epsilon} = 0$.  The gradient of  objective function is then 
  \begin{equation}\label{lag_graddd}
- \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} + \lambda^T \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt}  \right] dt + \ \kappa^T \frac{\partial I}{\partial \epsilon}
+ \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} + \lambda^T \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt}  \right] dt 
  \end{equation}
+
+The algorithm for computing $ \frac{d G}{d\epsilon}$ follows:
+\begin{enumerate}
+	\item Solve the forward problem for $\mathbf{X}$ from $0$ to $T$
+	\begin{equation*}
+	\begin{aligned}
+ \quad & C \frac{d \mathbf{X}}{dt} + D \mathbf{X} - \mathbf{S} = 0\\
+	&I(\mathbf{X}(0),\epsilon) = \mathbf{0}   \\
+	\end{aligned}
+	\end{equation*}
+	\item Solve the adjoint problem for $\lambda$ from $T$ to $0$
+	\begin{equation*}
+	\begin{aligned}
+	\quad & C^T \frac{d \lambda }{dt} - D^T \lambda = \left[ \frac{\partial g}{\partial x}\right]^T \\
+	&\lambda(T) = 0   \\
+	\end{aligned}
+	\end{equation*}
+	\item Get the objective function gradient
+	  \begin{equation*}\label{lag_graddd}
+	  \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} + \lambda^T \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt}  \right] dt 
+	  \end{equation*}
+\end{enumerate}
+
 \end{document}

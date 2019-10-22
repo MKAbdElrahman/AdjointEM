@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.5.16)  22 OCT 2019 01:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2019.5.16)  22 OCT 2019 02:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -639,7 +639,11 @@ Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix
 \c@FancyVerbLine=\count138
 \FV@StepNumber=\count139
 \FV@OutFile=\write3
-) (./Adjoint_EM.aux)
+) (./Adjoint_EM.aux
+
+LaTeX Warning: Label `lag_graddd' multiply defined.
+
+)
 \openout1 = `Adjoint_EM.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 28.
@@ -660,8 +664,7 @@ LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 28.
 LaTeX Font Info:    ... okay on input line 28.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 28.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 28.
-
-(/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 28.
@@ -807,7 +810,14 @@ same identifier (name{equation.0.2}) has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.53  \section{Problem Formulation}
-                                   ] [2]
+                                   ]
+Overfull \hbox (0.5796pt too wide) in paragraph at lines 76--90
+\T1/pplj/m/n/10 if the fol-low-ing def-i-ni-tions have been made $\OT1/zplm/b/n
+/10 X \OT1/zplm/m/n/10 = []$\T1/pplj/m/n/10 , $\OML/zplm/m/it/10 C \OT1/zplm/m/
+n/10 = []$\T1/pplj/m/n/10 , 
+ []
+
+[2]
 
 LaTeX Warning: Marginpar on page 3 moved.
 
@@ -820,20 +830,24 @@ Package bibentry Warning: You have used \nobibliography*
 (bibentry)                without a following \bibliography.
 (bibentry)                You may not be able to run BibTeX.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 145.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 168.
 [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 145.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 168.
  (./Adjoint_EM.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 145.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 145.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 168.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 168.
 Package rerunfilecheck Info: File `Adjoint_EM.out' has not changed.
 (rerunfilecheck)             Checksum: 16323346EB863CEEBA7C3CAF41F63977;353.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 145.
+
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 168.
  ) 
 Here is how much of TeX's memory you used:
- 13550 strings out of 493029
- 190893 string characters out of 6136234
- 395558 words of memory out of 5000000
+ 13553 strings out of 493029
+ 190911 string characters out of 6136234
+ 396589 words of memory out of 5000000
  16793 multiletter control sequences out of 15000+600000
  58923 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -848,10 +862,10 @@ lrc8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/fpl/fplrij8a.pfb></
 usr/share/texlive/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/share/texlive/texmf-
 dist/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on Adjoint_EM.pdf (4 pages, 103495 bytes).
+Output written on Adjoint_EM.pdf (4 pages, 104351 bytes).
 PDF statistics:
- 99 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 21 named destinations out of 1000 (max. 500000)
+ 102 PDF objects out of 1000 (max. 8388607)
+ 85 compressed objects within 1 object stream
+ 24 named destinations out of 1000 (max. 500000)
  1049 words of extra memory for PDF output out of 10000 (max. 10000000)
 
