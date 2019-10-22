@@ -160,9 +160,17 @@ The algorithm for computing $ \frac{d G}{d\epsilon}$ follows:
 	\end{aligned}
 	\end{equation*}
 	\item Get the objective function gradient
-	  \begin{equation*}\label{lag_graddd}
+	  \begin{equation}\label{lag_graddd}
 	  \frac{d G}{d\epsilon} = \int_{0}^{T} \left[  \frac{\partial g}{\partial \epsilon} + \lambda^T \frac{d C}{d \epsilon} \frac{d \mathbf{X}}{dt}  \right] dt 
-	  \end{equation*}
+	  \end{equation}
 \end{enumerate}
+It worth having these points in mind:
 
+\begin{itemize}
+	\item The problem of calculating the gradient with respect to all design variables has been reduced  to solving one extra simulation backward in time.
+	\item The adjoint equation is very similar to the forward equation, except the operators have been replaced by their adjoint (which is the same as t transpose for real operators). Thats why the problem is called the adjoint problem. For reciprocal systems, the matrices re equal to their adjoint and EM solvers already developed could be readily extended to solve the adjoint problem. 
+	\item The adjoint problem has a different source term, which depends on the gradient of the forward problem solution. This would require storing the field $\mathbf{X}$ at all times. This is a big challenge for numerical methods like FDTD, which usually take long running simulation times.  
+	\item The adjoint equation  could be converted to an initial value problem by substituting $t$ with $T-\tau$. 
+	\item The objective integral needs the derivative of the forward field, which also requires the storage the storage  at all times.
+\end{itemize}
 \end{document}
