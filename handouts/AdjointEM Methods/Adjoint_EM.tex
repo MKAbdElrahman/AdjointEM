@@ -115,7 +115,7 @@ I(\mathbf{X}(0),\epsilon) = \mathbf{0}
  \begin{equation}
 G =  \int^T_0 g(\mathbf{X},\epsilon,t)   + \lambda^T \left( C \frac{d \mathbf{X}}{dt} + D \mathbf{X} - \mathbf{S}) \right) + \kappa^T\left( I(\mathbf{X}(0),\epsilon) \right) dt
  \end{equation}
- The vector  $\mathbf{\lambda}$  is time dependent. $\kappa$  is another vector associated with the initial conditions.   The objective function has not changed after this modification, the equation is also the same  for any choice of $\lambda$ and $\kappa$. We will choose them in a way that eliminate the need for  the term   $ \frac{\partial \mathbf{X}}{\partial \epsilon}$ in the objective function gradient $\frac{dG}{d\epsilon}$. The vectors $\lambda$ and $\kappa$ are commonly called Lagrange multipliers and the modified objective function is the system Lagrangian that we seek to maximize. 
+ The vector  $\lambda$  is time dependent. $\kappa$  is another vector associated with the initial conditions.   The objective function has not changed after this modification, the equation is also the same  for any choice of $\lambda$ and $\kappa$. We will choose them in a way that eliminate the need for  the term   $ \frac{\partial \mathbf{X}}{\partial \epsilon}$ in the objective function gradient $\frac{dG}{d\epsilon}$. The vectors $\lambda$ and $\kappa$ are commonly called Lagrange multipliers and the modified objective function is the system Lagrangian that we seek to maximize. 
  
  Taking the total derivative of the Lagrangian,
  \begin{multline}\label{lag_grad}
@@ -155,7 +155,7 @@ The algorithm for computing $ \frac{d G}{d\epsilon}$ follows:
 	\item Solve the adjoint problem for $\lambda$ from $T$ to $0$
 	\begin{equation*}
 	\begin{aligned}
-	\quad & C^T \frac{d \lambda }{dt} - D^T \lambda = \left[ \frac{\partial g}{\partial x}\right]^T \\
+	\quad & C^T \frac{d \lambda }{dt} - D^T \lambda = \left[ \frac{\partial g}{\partial \mathbf{X}}\right]^T \\
 	&\lambda(T) = 0   \\
 	\end{aligned}
 	\end{equation*}
