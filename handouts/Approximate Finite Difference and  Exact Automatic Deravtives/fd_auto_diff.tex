@@ -1,20 +1,42 @@
 \documentclass{tufte-handout}
-\title{Symbolic, Numerical and Automatic Differentiation}
-\author[mohamedkamal]{Mohamed Kamal Abd Elrahman}
+\title{Sensitivity Calculations}
+\author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
+6 October, Giza,\\ Egypt}
+
+\usepackage{amsmath}  % extended mathematics
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
 
 \begin{document}
 	\maketitle
 	\begin{abstract}
-		\noindent
-		 Three different methods are introduced for taking the gradient of multivariate scaler functions. The implementation in Julia is provided. 
+		\noindent 
+	Sensitivities are used as measures of robustness for engineering systems. In many applications, one is interested about the system performance under small variations of a set of design parameters. In inverse device design, sensitivities guides the search within the space spanned by a set of design parameters.  
 	\end{abstract}
-	\section{Introduction}
-	\section{Symbolic Differentiation}
-	In this technique, the function $f$ has a symbolic representation for which we know how to differentiate analytically using standard derivative rules (product rule, chain rule, \dots). 
+\section{Numerical Differentiation}
+\subsection{Finite Difference Method}
+\subsection{Complex Step Method}
+\section{Automatic Differentiation}
 
-	 
-	\section{Finite Difference Methods}
-	\section{Automatic Differentiation}
-	\subsection{Forward Mode}
-	\subsection{Backward Mode}
+\subsection{Automatic Forward-Mode Differentiation}
+\subsection{Automatic Reverse-Mode Differentiation}
+
 \end{document}
