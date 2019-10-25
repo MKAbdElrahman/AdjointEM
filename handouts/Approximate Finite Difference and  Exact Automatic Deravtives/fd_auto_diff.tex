@@ -36,10 +36,21 @@
 	 \begin{equation}
 	 S_{ij} = \frac{d G_i}{dx_j}
 	 \end{equation}
-The entries $S_{ij}$ form the elements of the  $n \times m$  Jacobian matrix $S$ which maps $m$ input parameters to $n$ output merits.   The Jacobian could be seen as a generalization of the slope constant $s$ in $g(x) = s x$, but now is used for multivariate vector functions. The entries of row $S_i^T$ are the sensitivities of the merit function $G_i$ with respect to all the design parameters. The entries of column $S_j$ are the sensitivities of all the merit functions with respect to the single design parameter $x_j$  
+The entries $S_{ij}$ form the elements of the  $n \times m$  Jacobian matrix $S$ which maps $m$ input parameters to $n$ output merits.   The Jacobian could be seen as a generalization of the slope constant $s$ in $g(x) = s x$, but now is used for multivariate vector functions. The entries of row $S_i = \frac{d G_i}{d \mathbf{x}}$ are the sensitivities of the merit function $G_i$ with respect to all the design parameters. The entries of column $S_j = \frac{d \mathbf{G}}{d x_j}$ are the sensitivities of all the merit functions with respect to the single design parameter $x_j$  
 \section{Numerical Differentiation}
 
 \subsection{Finite Difference Method}
+In the finite difference approximation the sensitivity column $\frac{d \mathbf{G}}{dx_j}$  is calculated by perturbing the design parameter $x_j$  by a step $\Delta x_j$ and then evaluating the new merits $\mathbf{G}$. The derivative could be approximated by a  forward difference:
+\begin{equation}
+\frac{d \mathbf{G}}{dx_j} \approx  \frac{\mathbf{G}(\mathbf{x} + \mathbf{\Delta}_j) - \mathbf{G}(\mathbf{x})}{\Delta_j}
+\end{equation}
+where $\mathbf{\Delta}_j = \Delta_j {\mathbf{\hat{e}}_j}$.
+If we have $m$ design parameters, we need to finite difference $m$ times to fill all the columns of the Jacobian $S$. There are several disadvantage to the finite difference approach: 
+\begin{itemize}
+	\item The objective function  may be very costly to be perturbed and evaluated $m$ times, especially if $m$ is large.
+	\item The finite difference suffers from truncation errors as the step size $\Delta_j$  should be very  small. Practically, a very small step will lead to subtractive cancellation errors. So choosing a balanced step size is a problem by itself and we need to solve the this problem $m$ times for each design parameter. 
+\end{itemize}
+
 \subsection{Complex Step Method}
 \section{Automatic Differentiation}
 
