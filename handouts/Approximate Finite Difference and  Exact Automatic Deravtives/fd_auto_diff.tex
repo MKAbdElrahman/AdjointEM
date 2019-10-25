@@ -32,11 +32,11 @@
 	Sensitivities are used as measures of robustness for engineering systems. In many applications, one is interested about the system performance under small variations of a set of design parameters. In inverse device design, sensitivities guides the search within the space spanned by a set of design parameters.  
 	\end{abstract}
 \section{Problem Formulation}	
- Assuming $\mathbf{G}$	is a vector of design merits $ (G_1[\mathbf{x}], G_2[\mathbf{x}], \dots,G_n[\mathbf{x}]) $, where each component is a scaler function of $m$ design parameters	$ (x_1,x_2,\dots, x_m)$. The goal is to find the sensitivity of the design merit $G_i$  with respect to the design parameter $x_j$:
+ Assuming $\mathbf{G}$	is a vector of design merits $ (G_1[\mathbf{x}], G_2[\mathbf{x}], \dots,G_n[\mathbf{x}]) $, where each component is a scaler function of $m$ design parameters $\mathbf{x}$	$ (x_1,x_2,\dots, x_m)$. The goal is to find the sensitivity of the design merit $G_i$  with respect to the design parameter $x_j$:
 	 \begin{equation}
 	 S_{ij} = \frac{d G_i}{dx_j}
 	 \end{equation}
-The Jacobian $S$ will be an $n \times m$ matrix, which maps $m$ input parameters to $n$ output merits.   
+The entries $S_{ij}$ form the elements of the  $n \times m$  Jacobian matrix $S$ which maps $m$ input parameters to $n$ output merits.   The Jacobian could be seen as a generalization of the slope constant $s$ in $g(x) = s x$, but now is used for multivariate vector functions. The entries of row $S_i^T$ are the sensitivities of the merit function $G_i$ with respect to all the design parameters. The entries of column $S_j$ are the sensitivities of all the merit functions with respect to the single design parameter $x_j$  
 \section{Numerical Differentiation}
 
 \subsection{Finite Difference Method}
