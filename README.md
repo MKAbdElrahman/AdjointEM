@@ -18,3 +18,6 @@ At the end , we should be able to model and inverse design devices like waveguid
 ### Handouts 
 - This handout [handout](https://github.com/MKAbdElrahman/AdjointEM/blob/master/handouts/Approximate%20Finite%20Difference%20and%20%20Exact%20Automatic%20Deravtives/fd_auto_diff.pdf) introuduces the different appraoches used for calculating gradinets  or sensitivites of design objectives including the numerical finite difference and exact automatic differentiation.
 - This [handout](https://github.com/MKAbdElrahman/AdjointEM/blob/master/handouts/AdjointEM%20Methods/Adjoint_EM.pdf) derives the adjoint method for  Maxwell's equation in time domain. 
+### Notebooks
+- This [notebook](https://github.com/MKAbdElrahman/AdjointEM/blob/master/handouts/Approximate%20Finite%20Difference%20and%20%20Exact%20Automatic%20Deravtives/notebooks/Finite_Difference_Errors.ipynb) shows the truncation and substractive cancellation errors of the finite difference method. 
+
