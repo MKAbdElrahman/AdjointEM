@@ -14,3 +14,7 @@ in electromagnetics including the finite difference method, the finite element m
 5- Once, we get the basics in 1D, we will move to 2D and 3D and add more material models (anisotropic, dispersive, nonlinear, .. ) 
 
 At the end , we should be able to model and inverse design devices like waveguides bends, tapers, polarization rotators, wavelength multiplexers, spatial mode multiplexers,  nonlinear switches and  more!. We should be able to inverse design any photonic device :). 
+## Under Construction 
+### Handouts 
+- This handout [handout](https://github.com/MKAbdElrahman/AdjointEM/blob/master/handouts/Approximate%20Finite%20Difference%20and%20%20Exact%20Automatic%20Deravtives/fd_auto_diff.pdf) introuduces the different appraoches used for calculating gradinets  or sensitivites of design objectives including the numerical finite difference and exact automatic differentiation.
+- This [handout](https://github.com/MKAbdElrahman/AdjointEM/blob/master/handouts/AdjointEM%20Methods/Adjoint_EM.pdf) derives the adjoint method for  Maxwell's equation in time domain. 
