@@ -1,0 +1,61 @@
+\documentclass{tufte-handout}
+\title{ Adjoint Computational Electromagnetics}
+\author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
+6 October, Giza,\\ Egypt}
+
+\usepackage{amsmath}  % extended mathematics
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\begin{document}
+	\maketitle
+
+ \section{Problem Formulation}
+Time harmonic coupled first order Maxwell's equation for a linear nonmagnetic and source-free medium could be written as 
+\begin{subequations}
+	\begin{align}
+	\nabla \times \mathbf{E}  &= -j \mu_0  \omega \mathbf{H}\\
+	\nabla \times \mathbf{H}  &=   j \omega \epsilon \mathbf{E}
+	\end{align}
+\end{subequations}
+Which could be combined into a single second order PDE 
+\begin{equation}
+\nabla \times \nabla \times \mathbf{E}  = \mu_0  \epsilon_0 \omega^2    \epsilon_r \mathbf{E} = \left( \frac{\omega}{c} \right)^2     \epsilon_r \mathbf{E}
+\end{equation}
+This can be written in the standard generalized eigenvalue problem form.
+\begin{equation}
+A x = \lambda B x
+\end{equation}
+If the the following transformations have been made, $A = \nabla \times \nabla \times  $, $\mathbf{B} = \left( \frac{1}{c} \right)^2     \epsilon_r $ and  $x = \mathbf{E}$. The operators $A$ and $B$ can be shown to be positive-semidefinite and Hermitian. $B$ is even a Hermitian operator. It can be shown that $\omega$ is real, and that two solutions $x_i$ and $x_j$ with different frequencies satisfy an orthonormality relation:
+\begin{equation}
+x_i^T \epsilon x_j = \delta_{ij}
+\end{equation}
+Suppose we want to maximize the design objective $g(x,\lambda,\epsilon)$, the sensitivity of $g$ is 
+\begin{equation}
+\frac{d g}{d \epsilon} = \frac{\partial g}{\partial \epsilon} +  \frac{\partial g}{\partial x}  \frac{\partial x}{\partial \epsilon} +  \frac{\partial g}{\partial \lambda} \frac{\partial \lambda}{\partial \epsilon}
+\end{equation} 
+
+Taking the derivative of the eigenvalue equation
+\begin{equation}
+(A -\lambda B) \frac{\partial  x}{\partial \epsilon}   =  \frac{\partial \lambda}{\partial \epsilon} B x +  \lambda  \frac{\partial  B}{\partial \epsilon} x 
+\end{equation}
+Taking the derivative of the orthogonality equation
+\end{document}
