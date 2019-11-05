@@ -45,7 +45,7 @@ which can be combined into a single PDE \sidenote[2]{We will refer to this equat
 \nabla \times \frac{1}{\epsilon} \nabla \times \mathbf{H}   = \left(  \frac{\omega}{c}\right)^2 \mathbf{H}
 \end{equation}
 Equation. \ref{master_eq} is a standard eigenvalue problem of the form,
-\begin{equation}
+\begin{equation}\label{ev}
 A x = \lambda x
 \end{equation}
 where we have identified the operator $A = \nabla \times \nabla \times  $ and the eigenvector  $x = \mathbf{E}$ with associated eigenvalue $\lambda = \omega^2$. The operator $A$  can be shown to be hermitian and positive-semidefinite. The eigenmodes can be normalized
@@ -77,7 +77,7 @@ L=  g(p,x,\lambda) + \kappa^T(A- \lambda)x + \sigma (1-x^T x)
   \end{equation}
   
   Requiring $\kappa$ and $\sigma$ to satisfy the following equations,  
-  \begin{equation}
+  \begin{equation} \label{90}
  \kappa^T x   =  \frac{\partial g}{\partial \lambda}
   \end{equation}
   \begin{equation}\label{11}
@@ -87,4 +87,20 @@ causes the  implicit design variation of the
 Lagrangian to vanish. The second equation is problematic: $A - \lambda$ is singular, with a null space of $x$. So, we  also require $\sigma$  to make the solution orthogonal to the  the null space:
 $x^T \left( \left(  \frac{\partial g}{\partial x} \right) ^T -2 \sigma x \right)  = 0  $. Then, $\sigma = \frac{x^T \left( \frac{\partial g}{\partial x} \right)^T }{2}$
 
+Equation. \ref{11}  then becomes 
+ \begin{equation}\label{12}
+ (A-\lambda) \kappa - x^T \left( \frac{\partial g}{\partial x} \right)^T  x   = -\left(  \frac{\partial g}{\partial x} \right) ^T
+ \end{equation}
+ This equation still has infinitely many solutions:  $\kappa + \theta x $ is a solution for any $\theta$. We can fix $\theta $ using equation. \ref{90} and then $\theta = \frac{\partial g}{ \partial \lambda} $. 
+  The sensitivity of $g$ is finally, 
+  \begin{equation}{\label{sens}}
+  \frac{d g}{d p}  =\left( \kappa +  \frac{\partial g}{ \partial \lambda} x \right) ^T \frac{d A}{d p}  x 
+  \end{equation}
+  
+  Thus the sensitivity of $g$ is obtained in following steps: 
+  \begin{enumerate}
+  	\item Solving equation \ref{ev} for $x$
+  	\item  Solving equation \ref{12} for $\kappa$
+  	\item Substituting with $x$ and $\kappa$ in equation \ref{sens}
+  \end{enumerate}
 \end{document}
