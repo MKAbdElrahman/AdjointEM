@@ -52,5 +52,39 @@ where we have identified the operator $A = \nabla \times \nabla \times  $ and th
 \begin{equation}
 x^T x = 1
 \end{equation}
-\section{Sensitivity Derivatives (Nondegenerate)}
+\section{Sensitivity Derivatives (Nondegenerate Case)}
+Our optimization problem can  be formulated as
+
+\begin{equation}\label{opt_problem}
+\begin{aligned}
+\min_{p} \quad & g(p,x,\lambda) \\
+\textrm{s.t.} \quad &  A x = \lambda x \\ & 
+  x^T x = 1
+\end{aligned}
+\end{equation}
+where $p$ is a vector of design parameters and $g$ is the objective function we seek to minimize. To develop the eign-adjoint variable method, we first define the Lagrangian  as
+\begin{equation}\label{lagranian}
+L=  g(p,x,\lambda) + \kappa^T(A- \lambda)x + \sigma (1-x^T x) 
+\end{equation} 
+ where $\sigma$ and  $\kappa$  are the Lagrange multipliers, for eigenvalues and eigenvectors, respectively \sidenote[3]{We will choose the Lagrange multipliers in a clever way to cancel the annoying derivative terms later.}.  Direct differentiation of equation.\ref{lagranian} with respect to the design parameters 
+ \begin{equation}
+ \frac{d L}{d p} = \frac{\partial g}{\partial p} + \frac{\partial g}{\partial x} \frac{d x}{d p}+ \frac{\partial g}{\partial \lambda} \frac{d \lambda}{d p} + \kappa^T \left( \frac{d A}{d p}- \frac{d \lambda}{d p}\right)  x + \kappa^T \left( A- \lambda \right) \frac{d x}{d p } -2  \sigma \left( x^T \frac{d x}{d p } \right)  
+ \end{equation}
+ Collecting terms in $\frac{d \lambda}{d p }$ and $\frac{d x }{d p}$ 
+ 
+  \begin{equation}
+  \frac{d L}{d p} = \frac{\partial g}{\partial p} + \left(  \frac{\partial g}{\partial x} + \kappa^T (A-\lambda) -2 \sigma x^T \right)  \frac{d x}{d p}+ \left(   \frac{\partial g}{\partial \lambda}- \kappa^T x  \right)  \frac{d \lambda}{d p} + \kappa^T  \frac{d A}{d p}  x  
+  \end{equation}
+  
+  Requiring $\kappa$ and $\sigma$ to satisfy the following equations,  
+  \begin{equation}
+ \kappa^T x   =  \frac{\partial g}{\partial \lambda}
+  \end{equation}
+  \begin{equation}\label{11}
+  (A-\lambda) \kappa -2 \sigma x   = -\left(  \frac{\partial g}{\partial x} \right) ^T
+  \end{equation}
+causes the  implicit design variation of the
+Lagrangian to vanish. The second equation is problematic: $A - \lambda$ is singular, with a null space of $x$. So, we  also require $\sigma$  to make the solution orthogonal to the  the null space:
+$x^T \left( \left(  \frac{\partial g}{\partial x} \right) ^T -2 \sigma x \right)  = 0  $. Then, $\sigma = \frac{x^T \left( \frac{\partial g}{\partial x} \right)^T }{2}$
+
 \end{document}
