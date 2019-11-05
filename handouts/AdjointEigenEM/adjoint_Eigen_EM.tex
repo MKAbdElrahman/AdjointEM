@@ -1,5 +1,6 @@
 \documentclass{tufte-handout}
-\title{ Adjoint Computational Electromagnetics}
+\title{ Adjoint Computational Electromagnetics \\ 
+Eigenvalue Problems	}
 \author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
 6 October, Giza,\\ Egypt}
 
@@ -28,34 +29,28 @@
 \begin{document}
 	\maketitle
 
+\begin{abstract}
+	The sensitivities of eigenvalues and eigenvectors due to perturbations in the deign variables are derived. The focus here is on linear, isotropic, nonmagnetic and transparent materials \sidenote[1]{In transparent materials, both $\epsilon$ and $\mu$ are real and positive.}. 
+\end{abstract}
  \section{Problem Formulation}
-Time harmonic coupled first order Maxwell's equation for a linear nonmagnetic and source-free medium could be written as 
+Maxwell's equation for  reads 
 \begin{subequations}
 	\begin{align}
 	\nabla \times \mathbf{E}  &= -j \mu_0  \omega \mathbf{H}\\
-	\nabla \times \mathbf{H}  &=   j \omega \epsilon \mathbf{E}
+	\nabla \times \mathbf{H}  &=   j \omega \epsilon_0 \epsilon(r) \mathbf{E}
 	\end{align}
 \end{subequations}
-Which could be combined into a single second order PDE 
-\begin{equation}
-\nabla \times \nabla \times \mathbf{E}  = \mu_0  \epsilon_0 \omega^2    \epsilon_r \mathbf{E} = \left( \frac{\omega}{c} \right)^2     \epsilon_r \mathbf{E}
+which can be combined into a single PDE \sidenote[2]{We will refer to this equation as the master equation.} 
+\begin{equation}\label{master_eq}
+\nabla \times \frac{1}{\epsilon} \nabla \times \mathbf{H}   = \left(  \frac{\omega}{c}\right)^2 \mathbf{H}
 \end{equation}
-This can be written in the standard generalized eigenvalue problem form.
+Equation. \ref{master_eq} is a standard eigenvalue problem of the form,
 \begin{equation}
-A x = \lambda B x
+A x = \lambda x
 \end{equation}
-If the the following transformations have been made, $A = \nabla \times \nabla \times  $, $\mathbf{B} = \left( \frac{1}{c} \right)^2     \epsilon_r $ and  $x = \mathbf{E}$. The operators $A$ and $B$ can be shown to be positive-semidefinite and Hermitian. $B$ is even a Hermitian operator. It can be shown that $\omega$ is real, and that two solutions $x_i$ and $x_j$ with different frequencies satisfy an orthonormality relation:
+where we have identified the operator $A = \nabla \times \nabla \times  $ and the eigenvector  $x = \mathbf{E}$ with associated eigenvalue $\lambda = \omega^2$. The operator $A$  can be shown to be hermitian and positive-semidefinite. The eigenmodes can be normalized
 \begin{equation}
-x_i^T \epsilon x_j = \delta_{ij}
+x^T x = 1
 \end{equation}
-Suppose we want to maximize the design objective $g(x,\lambda,\epsilon)$, the sensitivity of $g$ is 
-\begin{equation}
-\frac{d g}{d \epsilon} = \frac{\partial g}{\partial \epsilon} +  \frac{\partial g}{\partial x}  \frac{\partial x}{\partial \epsilon} +  \frac{\partial g}{\partial \lambda} \frac{\partial \lambda}{\partial \epsilon}
-\end{equation} 
-
-Taking the derivative of the eigenvalue equation
-\begin{equation}
-(A -\lambda B) \frac{\partial  x}{\partial \epsilon}   =  \frac{\partial \lambda}{\partial \epsilon} B x +  \lambda  \frac{\partial  B}{\partial \epsilon} x 
-\end{equation}
-Taking the derivative of the orthogonality equation
+\section{Sensitivity Derivatives (Nondegenerate)}
 \end{document}
