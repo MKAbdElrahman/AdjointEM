@@ -1,0 +1,54 @@
+\documentclass{tufte-handout}
+\title{ Adjoint Computational Electromagnetics \\
+	Ray Optics}
+\author[mohamedkamal]{Mohamed Kamal Abd Elrahman \\
+6 October, Giza,\\ Egypt}
+
+\usepackage{amsmath}  % extended mathematics
+\usepackage{graphicx} % allow embedded images
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+\fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\begin{document}
+	\maketitle
+	\begin{abstract}
+		\noindent
+		 The adjoint method is used to  inverse design High frequency EM problems where light rays are governed by the Eikonal equation.    
+	\end{abstract}
+
+\section{The Eikonal Equation}
+The Eikonal equation is $ F = ma$ for ray optics!. It can be written as a differential equation in the phase.
+\begin{equation}
+\left( \frac{\partial \phi}{\partial x}\right) ^2 + \left( \frac{\partial \phi}{\partial y}\right) ^2 - \epsilon(x,y) = 0
+\end{equation}
+where $\epsilon(x,y)$ is the dielectric profile. Gradient of a wavefront at a position $(x,y)$ defines the direction of the wave propagation. The contours of solution are the wavefronts.
+	\section{Formulation}
+  \begin{equation}\label{opt_problem}
+  \begin{aligned}
+  \min_{\epsilon} \quad & G(\epsilon) = \int g(\phi,\epsilon) dx dy\\
+  \textrm{s.t.} \quad & A(\phi) =  \left( \frac{\partial \phi}{\partial x}\right) ^2 + \left( \frac{\partial \phi}{\partial y}\right) ^2 - \epsilon(x,y) = 0\\
+  &I(\phi(x_s),\epsilon) = 0   \\
+  \end{aligned}
+  \end{equation}
+\section{Sensitivity Analysis}
+\begin{equation}
+L = G(\epsilon) + \int \lambda A(\phi) \, dx dy  
+\end{equation}
+\end{document}
