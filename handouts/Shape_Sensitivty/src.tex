@@ -1,0 +1,65 @@
+\documentclass{tufte-handout}
+
+\title{Shape Optimization of Photonic Devices }
+
+\author[MK]{Mohamed Kamal AbdElrahman}
+
+%\date{28 March 2010} % without \date command, current date is supplied
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+This is an introduction to inverse design of  photonic devices through shape optimization.  
+\end{abstract}
+\section{Introduction}
+In topology optimization(TO), every pixel in the design domain is taken as a design variable. However, in shape optimization(SO), the device boundary interface takes the role. SO is very useful, we never face the gray region problems as in TO and we don't need an additional projection stage.  Inverse design with TO is a very dangerous process!, you need to have a good initial guess from the beginning and you need further constraints to prevent very small features from appearing. In TO, the discovered devices looks random and its theory of operation is very hard to understand in most cases. In SO, the discovered devices inherits so mush from the initial design guesses. In practice SO and TO are used, sometimes we have no knowledge of a good initial device to start the optimization with, TO could help us discover some initial device ideas. Other times, we  have an excellent device idea, and we enhance the device performance with shape optimization. 
+\section{Formulation}
+Suppose we want to minimize the objective function $G$ by varying the interface between two adjacent materials with dielectric constants $\epsilon_1$ and $\epsilon_2$. We assume  $G$ can be written in the following form:
+\begin{equation}
+F(\Omega(t)) = \int_{\Omega(t)} f(\psi,\nabla \psi) \, d\Omega
+\end{equation} 
+$\psi$ is the field. $\Omega$ represents the volume of the design region and $\Gamma$ is its interface. The goals is to change $\Gamma$  in a way that minimizes $F$. 
+The time rate of change of $F$ is
+\begin{equation}
+\frac{d F}{d t} = \int_{\Omega(t)} \left( \frac{\partial f}{\partial t} + \nabla \cdot (f \boldsymbol{V})  \right) d\Omega
+\end{equation}
+Using the divergence theorem, this can be written as:
+\begin{equation}
+\frac{d F}{d t} =  \int_{\Omega(t)} \frac{\partial f}{\partial t} \,  d\Omega + \int_{\Gamma(t)}  f V_n \,  d\Gamma
+\end{equation}
+where $V_n$ is normal perturbation velocity component at the interface. The time rate of change of $f$ could be expanded with the chain rule:
+\begin{equation}
+ \frac{\partial f}{\partial t} =  \frac{\partial f}{\partial \psi}   \frac{\partial \psi}{\partial t}+  \frac{\partial f}{\partial \nabla \psi}   \frac{\partial \nabla \psi}{\partial t}
+\end{equation}
+Making use of the identity: 
+\begin{equation}
+\frac{d \phi}{d t} = \frac{\partial \phi}{\partial t}+ 
++ \boldsymbol{V}  \cdot \nabla \phi
+\end{equation}
+
+\end{document}
