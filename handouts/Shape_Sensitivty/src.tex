@@ -41,7 +41,7 @@ In topology optimization(TO), every pixel in the design domain is taken as a des
 \section{Formulation}
 Suppose we want to minimize the objective function $G$ by varying the interface between two adjacent materials with dielectric constants $\epsilon_1$ and $\epsilon_2$. We assume  $G$ can be written in the following form:
 \begin{equation}
-F(\Omega(t)) = \int_{\Omega(t)} f(\psi,\nabla \psi) \, d\Omega
+F(\Omega(t)) = \int_{\Omega(t)} f(\psi) \, d\Omega
 \end{equation} 
 $\psi$ is the field. $\Omega$ represents the volume of the design region and $\Gamma$ is its interface. The goals is to change $\Gamma$  in a way that minimizes $F$. 
 The time rate of change of $F$ is
@@ -49,17 +49,62 @@ The time rate of change of $F$ is
 \frac{d F}{d t} = \int_{\Omega(t)} \left( \frac{\partial f}{\partial t} + \nabla \cdot (f \boldsymbol{V})  \right) d\Omega
 \end{equation}
 Using the divergence theorem, this can be written as:
-\begin{equation}
+\begin{equation}\label{a}
 \frac{d F}{d t} =  \int_{\Omega(t)} \frac{\partial f}{\partial t} \,  d\Omega + \int_{\Gamma(t)}  f V_n \,  d\Gamma
 \end{equation}
 where $V_n$ is normal perturbation velocity component at the interface. The time rate of change of $f$ could be expanded with the chain rule:
 \begin{equation}
- \frac{\partial f}{\partial t} =  \frac{\partial f}{\partial \psi}   \frac{\partial \psi}{\partial t}+  \frac{\partial f}{\partial \nabla \psi}   \frac{\partial \nabla \psi}{\partial t}
+ \frac{\partial f}{\partial t} =  \frac{\partial f}{\partial \psi}   \frac{\partial \psi}{\partial t}
 \end{equation}
 Making use of the identity: 
 \begin{equation}
-\frac{d \phi}{d t} = \frac{\partial \phi}{\partial t}+ 
+\frac{d \phi}{d t} = \frac{\partial \phi}{\partial t}
 + \boldsymbol{V}  \cdot \nabla \phi
 \end{equation}
+\begin{equation}
+\frac{\partial f}{\partial t} =  \frac{\partial f}{\partial \psi}  \left(  \frac{d \psi}{d t}
+- \boldsymbol{V}  \cdot \nabla \psi \right) 
+\end{equation}
 
+Substituting the last result in \ref{a}
+\begin{equation}
+\frac{d F}{d t} =  \int_{\Omega(t)} \left(\frac{\partial f}{\partial \psi}  \left(  \frac{d \psi}{d t}
+- \boldsymbol{V}  \cdot \nabla \psi \right) \right)  \,  d\Omega + \int_{\Gamma(t)}  f V_n \,  d\Gamma
+\end{equation}
+Now, we need to git rid of $\frac{d \psi}{d t}$.  The method of Lagrange multiplier can be used.
+
+\begin{equation}
+\frac{d F}{d t} =  \int_{\Omega(t)} \left(\frac{\partial f}{\partial \psi}  \left(  \frac{d \psi}{d t}
+- \boldsymbol{V}  \cdot \nabla \psi \right) 
+\right)   \,  d\Omega + 
+\int_{\Gamma(t)}  f V_n \,  d\Gamma +  \int_{\Omega(t)} \lambda^T \left( \frac{\partial A}{\partial t} \psi + A \frac{\partial \psi}{\partial t} \right) 
+\end{equation}
+
+
+\begin{equation}
+\frac{d F}{d t} =  \int_{\Omega(t)} \left(\frac{\partial f}{\partial \psi}  \left(  \frac{d \psi}{d t}
+- \boldsymbol{V}  \cdot \nabla \psi \right) 
+ \right)   \,  d\Omega + 
+ \int_{\Gamma(t)}  f V_n \,  d\Gamma +  \int_{\Omega(t)} \lambda^T \left(  \left(  \frac{d A}{d t}
+ - \boldsymbol{V}  \cdot \nabla A \right)  \psi + A \left(  \frac{d \psi}{d t}
+ - \boldsymbol{V}  \cdot \nabla \psi \right) \right) 
+\end{equation}
+
+collecting terms in $\frac{d \psi}{d t}$ and $\frac{\partial A}{\partial t} = 0$
+\begin{equation}
+\left(\frac{\partial f}{\partial \psi} + \lambda^T A \right) \frac{d \psi}{d t}
+\end{equation}
+\begin{equation}
+\frac{d F}{d t} =  \int_{\Omega(t)} \left(\left( \lambda^T A  + \frac{ \partial f}{\partial \psi}\right)   \left( 
+- \boldsymbol{V}  \cdot \nabla \psi \right) 
+\right)   \,  d\Omega + 
+\int_{\Gamma(t)}  f V_n \,  d\Gamma  
+\end{equation}
+
+
+
+\begin{equation}
+\frac{d F}{d t} =  \int_{\Gamma(t)}  f V_n \,  d\Gamma  
+\end{equation}
+	
 \end{document}

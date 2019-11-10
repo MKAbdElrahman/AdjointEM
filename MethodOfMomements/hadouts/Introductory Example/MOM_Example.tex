@@ -1,0 +1,73 @@
+\documentclass{tufte-handout}
+
+\title{Introduction to the Method of Moments}
+
+\author[MK]{Mohamed Kamal AbdElrahman}
+
+%\date{28 March 2010} % without \date command, current date is supplied
+
+%\geometry{showframe} % display margins for debugging page layout
+
+\usepackage{graphicx} % allow embedded images
+  \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+  \graphicspath{{graphics/}} % set of paths to search for images
+\usepackage{braket}
+\usepackage{amsmath}  % extended mathematics
+\usepackage{booktabs} % book-quality tables
+\usepackage{units}    % non-stacked fractions and better unit spacing
+\usepackage{multicol} % multiple column layout facilities
+\usepackage{lipsum}   % filler text
+\usepackage{fancyvrb} % extended verbatim environments
+  \fvset{fontsize=\normalsize}% default font size for fancy-verbatim environments
+
+% Standardize command font styles and environments
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+
+
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{abstract}
+This is an introduction the basic aspects of the Method of Moments (MOM).  
+\end{abstract}
+\section{Review}
+Given $g(x)$, find $f(x)$ in the interval $ \Omega = [0,1]$ satisfying 
+\begin{equation}
+  \begin{aligned}
+  -\frac{d^2 f}{d x^2} &=g(x),\quad \Omega\\
+  f&=0  \quad \partial\Omega
+  \end{aligned} 
+\end{equation}
+This is a boundary value problem of the form $L f = g$ for which 
+\begin{align}
+L =  -\frac{d^2 f}{d x^2}
+\end{align}  
+The operator $L$ is hermitian and positive-definite
+\begin{equation}
+\Braket{L f|g} = \Braket{f|L g}
+\end{equation}  
+ \begin{equation}
+ \Braket{L f|f} \geq 0
+ \end{equation}
+ The inverse of operator $L$ can be obtained  with the help of standard Green's function techniques 
+ \begin{equation}
+ f(x) = L^{-1}(g) = \int_{0}^{1} G(x,x^{\prime})  g(x') dx'
+ \end{equation}
+ where G is the Green's function
+ \begin{equation}
+ G(x,x) = \begin{cases} 
+ x(1-x^\prime) & x < x^\prime \\
+ (1-x)x^\prime & x > x^\prime 
+ \end{cases}
+ \end{equation}
+ The operator $L^{-1}$ is also Hermitian and positive-definite. Note that the boundary conditions must be specified for the domain of $L$, however, they are not required for $L^{-1}$ (Green functions already accounts for them).  
+\end{document}
