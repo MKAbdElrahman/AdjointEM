@@ -70,4 +70,25 @@ The operator $L$ is hermitian and positive-definite
  \end{cases}
  \end{equation}
  The operator $L^{-1}$ is also Hermitian and positive-definite. Note that the boundary conditions must be specified for the domain of $L$, however, they are not required for $L^{-1}$ (Green functions already accounts for them).  
+ \section{Method of Moments}
+ Consider the steady state equation
+ \begin{equation}\label{ steady_state_eq}
+ L f = g
+ \end{equation}
+ where $L$ is a linear operator, $g$ is a known excitation and the response $f$ is to be found. Let $f$ be expanded as a superposition of a set of basis functions $\Ket{v_i}$ with unknown expansion coefficients $c_i$
+ \begin{equation}\label{superposition_eq}
+f = \sum_i c_i \Ket{v_i} 
+ \end{equation}
+ For approximate solutions, (\ref{ steady_state_eq}) is truncated to a finite summation. Substituting (\ref{superposition_eq}) in (\ref{ steady_state_eq}), and using the linearity of $L$, we have
+ \begin{equation} \label{stead_eq_expanded}
+   \sum_i c_i L \Ket{v_i} = g
+ \end{equation}  
+ Taking the inner product of  (\ref{stead_eq_expanded}) with a set of test functions $w_m$, where $  m = 1,2, \dots $  
+ \begin{equation}\label{linear_sys}
+    \sum_i c_i  \braket{w_m |L v_i} = \Braket{w_m | g}
+ \end{equation}
+ Once the basis and test functions are chosen, Equation (\ref{linear_sys}) becomes a standard linear system of algebraic equations. The procedure is similar to  the method of wighted residual commonly used for finite element methods (but instead of a differential operator we have an integral operator) and the particular choice $w_i = v_i$ is known as Galerkin method.  
+ \section{The Collocation Method}
+ The idea of the collocation method is to demand the satisfaction of (\ref{stead_eq_expanded}) at a number of discrete points in the region of interest. The collocation method can be also seen as taking Dirac delta functions as testing functions.
+ 
 \end{document}
