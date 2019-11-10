@@ -87,8 +87,10 @@ f = \sum_i c_i \Ket{v_i}
  \begin{equation}\label{linear_sys}
     \sum_i c_i  \braket{w_m |L v_i} = \Braket{w_m | g}
  \end{equation}
- Once the basis and test functions are chosen, Equation (\ref{linear_sys}) becomes a standard linear system of algebraic equations. The procedure is similar to  the method of wighted residual commonly used for finite element methods (but instead of a differential operator we have an integral operator) and the particular choice $w_i = v_i$ is known as Galerkin method.  
+ once the basis and test functions are chosen, Equation (\ref{linear_sys}) becomes a standard linear system of algebraic equations. The procedure is similar to  the method of wighted residual commonly used for finite element methods (but instead of a differential operator we have an integral operator) and the particular choice $w_i = v_i$ is known as Galerkin method. In the finite element method, the basis (trial) and test functions have to be at least first order. In the moment method, basis and test function can be zero-order (pulse functions) because of the integral operator. 
  \section{The Collocation Method}
  The idea of the collocation method is to demand the satisfaction of (\ref{stead_eq_expanded}) at a number of discrete points in the region of interest. The collocation method can be also seen as taking Dirac delta functions as testing functions.
- 
+ \section{The Subdomain Collocation Method}
+ The idea of  this approach is to choose zeroth-order test functions which exist only over subsections of the domain of $f$.   
+ \section{Poisson Equation}
 \end{document}
